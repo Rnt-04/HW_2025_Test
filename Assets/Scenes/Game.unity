@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894532c81add14045a80996b8a150455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
-  target: {fileID: 0}
+  target: {fileID: 611132317}
   offset: {x: 0, y: 7.5, z: -10}
 --- !u!1 &410087039
 GameObject:
@@ -411,6 +411,7 @@ GameObject:
   - component: {fileID: 611132315}
   - component: {fileID: 611132314}
   - component: {fileID: 611132313}
+  - component: {fileID: 611132318}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -537,6 +538,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &611132318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611132312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 295f9e14c588d604fb08f794860fefb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  fallDeathY: -2
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +600,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &946296867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 946296869}
+  - component: {fileID: 946296868}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &946296868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946296867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e958f684207e7604595d8730862d27ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  platformPrefab: {fileID: 0}
+  player: {fileID: 0}
+  platformSpacing: 3
+  minLife: 4
+  maxLife: 5
+  spawnInterval: 3
+--- !u!4 &946296869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946296867}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.47611, y: 1, z: -0.35223}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1536926928 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 580494481791695709, guid: 1ed8e2ed727244d43b3896829fa84b32, type: 3}
+  m_PrefabInstance: {fileID: 1967691600}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &1967691600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -634,11 +709,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5394256140017763797, guid: 1ed8e2ed727244d43b3896829fa84b32, type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 1536926928}
     - target: {fileID: 7345601646697031459, guid: 1ed8e2ed727244d43b3896829fa84b32, type: 3}
       propertyPath: m_Name
       value: Platform
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 409866923900568882, guid: 1ed8e2ed727244d43b3896829fa84b32, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -652,3 +732,4 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1967691600}
   - {fileID: 611132317}
+  - {fileID: 946296869}
