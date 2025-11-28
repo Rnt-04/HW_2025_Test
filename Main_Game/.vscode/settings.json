@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "HW_2025_Test.sln"
+    "dotnet.defaultSolution": "Main_Game.sln"
 }
