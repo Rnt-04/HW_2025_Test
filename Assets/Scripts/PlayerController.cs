@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        // Get speed from JSON
+        if (GameDataManager.Instance != null)
+            moveSpeed = GameDataManager.Instance.playerSpeed;
     }
 
     private void Update()

@@ -26,14 +26,20 @@ public class Platform : MonoBehaviour
 
     private void Start()
     {
+        if (GameDataManager.Instance != null)
+        {
+            minLife = GameDataManager.Instance.minDestroyTime;
+            maxLife = GameDataManager.Instance.maxDestroyTime;
+            spawnThreshold = GameDataManager.Instance.spawnTime;
+        }
+        
         lifeTimer = Random.Range(minLife, maxLife);
 
         // Safety
         if (spawnThreshold >= lifeTimer)
             spawnThreshold = lifeTimer - 0.1f;
 
-        if (timerText == null)
-            timerText = GetComponentInChildren<TMP_Text>();
+        timerText ??= GetComponentInChildren<TMP_Text>();
 
         activePlatforms.Add(this);
     }
