@@ -7,8 +7,8 @@ public class Platform : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float minLife = 4f;
     [SerializeField] private float maxLife = 5f;
-    [SerializeField] private float spawnThreshold = 3f; // when to spawn next platform
-    [SerializeField] private float distanceToNext = 3f; // distance to next platform
+    [SerializeField] private float spawnThreshold = 3f; // When to spawn next platform
+    [SerializeField] private float distanceToNext = 3f;
 
     [Header("UI")]
     [SerializeField] private TMP_Text timerText;
@@ -21,9 +21,11 @@ public class Platform : MonoBehaviour
 
     private static readonly Vector3[] directions = { Vector3.forward, Vector3.back, Vector3.left, Vector3.right };
 
+    // Static list to track active platforms
+    private static List<Platform> activePlatforms = new List<Platform>();
+
     private void Start()
     {
-        // Initialize life timer
         lifeTimer = Random.Range(minLife, maxLife);
 
         // Safety
@@ -32,6 +34,8 @@ public class Platform : MonoBehaviour
 
         if (timerText == null)
             timerText = GetComponentInChildren<TMP_Text>();
+
+        activePlatforms.Add(this);
     }
 
     private void Update()
@@ -42,16 +46,18 @@ public class Platform : MonoBehaviour
         if (timerText != null)
             timerText.text = lifeTimer.ToString("F1");
 
-        // Spawn next platform
-        if (!hasSpawnedNext && lifeTimer <= spawnThreshold)
+        // Spawn next platform only if < 2 active platforms
+        if (!hasSpawnedNext && lifeTimer <= spawnThreshold && activePlatforms.Count < 2)
         {
             SpawnNextPlatform();
             hasSpawnedNext = true;
         }
 
-        // Destroy self after life ends
         if (lifeTimer <= 0f)
+        {
+            activePlatforms.Remove(this);
             Destroy(gameObject);
+        }
     }
 
     private void SpawnNextPlatform()
@@ -59,26 +65,20 @@ public class Platform : MonoBehaviour
         Vector3 dir = GetRandomDirection();
         Vector3 spawnPos = transform.position + dir * distanceToNext;
 
-        // Instantiate platform prefab
         GameObject newObj = Instantiate(gameObject, spawnPos, Quaternion.identity);
         Platform newPlatform = newObj.GetComponent<Platform>();
-
-        // Pass entry direction so no U-turn
         newPlatform.entryDirection = dir;
-
-        // Reset flags for new platform
         newPlatform.ResetPlatform();
     }
 
     private Vector3 GetRandomDirection()
     {
         List<Vector3> validDirs = new List<Vector3>();
-
         foreach (var dir in directions)
         {
-            if (dir != -entryDirection) validDirs.Add(dir);
+            if (dir != -entryDirection)
+                validDirs.Add(dir);
         }
-
         return validDirs[Random.Range(0, validDirs.Count)];
     }
 
@@ -87,8 +87,6 @@ public class Platform : MonoBehaviour
         hasSpawnedNext = false;
         hasGivenScore = false;
         lifeTimer = Random.Range(minLife, maxLife);
-
-        // Recalculate spawn threshold
         spawnThreshold = Mathf.Min(spawnThreshold, lifeTimer - 0.1f);
     }
 
