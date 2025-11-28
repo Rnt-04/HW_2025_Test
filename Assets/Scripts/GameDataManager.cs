@@ -4,16 +4,15 @@ public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance;
 
-    [Header("Player Settings")]
     public float playerSpeed = 3f;
 
-    [Header("Pulpit Settings")]
+    [Header("Platform Settings")]
     public float minDestroyTime = 4f;
     public float maxDestroyTime = 5f;
     public float spawnTime = 2.5f;
 
     [Header("JSON Config")]
-    public string jsonFileName = "config"; // put config.json in Resources folder
+    public string jsonFileName = "config";
 
     private void Awake()
     {

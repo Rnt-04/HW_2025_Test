@@ -7,7 +7,7 @@ public class Platform : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float minLife = 4f;
     [SerializeField] private float maxLife = 5f;
-    [SerializeField] private float spawnThreshold = 3f; // When to spawn next platform
+    [SerializeField] private float spawnThreshold = 3f;
     [SerializeField] private float distanceToNext = 3f;
 
     [Header("UI")]
@@ -21,7 +21,6 @@ public class Platform : MonoBehaviour
 
     private static readonly Vector3[] directions = { Vector3.forward, Vector3.back, Vector3.left, Vector3.right };
 
-    // Static list to track active platforms
     private static List<Platform> activePlatforms = new List<Platform>();
 
     private void Start()
@@ -35,7 +34,6 @@ public class Platform : MonoBehaviour
         
         lifeTimer = Random.Range(minLife, maxLife);
 
-        // Safety
         if (spawnThreshold >= lifeTimer)
             spawnThreshold = lifeTimer - 0.1f;
 
@@ -52,7 +50,6 @@ public class Platform : MonoBehaviour
         if (timerText != null)
             timerText.text = lifeTimer.ToString("F1");
 
-        // Spawn next platform only if < 2 active platforms
         if (!hasSpawnedNext && lifeTimer <= spawnThreshold && activePlatforms.Count < 2)
         {
             SpawnNextPlatform();

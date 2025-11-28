@@ -66,6 +66,6 @@ public class GameManager : MonoBehaviour
     public void GoToMainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0); // Main menu index
+        SceneManager.LoadScene(0);
     }
 }

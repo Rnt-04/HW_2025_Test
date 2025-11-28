@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        // Get speed from JSON
         if (GameDataManager.Instance != null)
             moveSpeed = GameDataManager.Instance.playerSpeed;
     }
@@ -27,8 +26,7 @@ public class PlayerController : MonoBehaviour
         vel.x = move.x;
         vel.z = move.z;
         rb.linearVelocity = vel;
-
-        // Optional: detect falling off platforms
+        
         if (transform.position.y < -2f)
             GameManager.Instance.PlayerDied();
     }
